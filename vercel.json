@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "src/server.js",    "use": "@vercel/node"   },
+      { "src": "static/**/*",      "use": "@vercel/static" },
+      { "src": "templates/**/*",   "use": "@vercel/static" }
+    ],
+    "routes": [
+      { "src": "/css/(.*)",        "headers": { "cache-control": "public,max-age=0,must-revalidate" }, "dest": "/static/css/$1" },
+      { "src": "/images/(.*)",     "dest": "/static/images/$1" },
+      { "src": "/(.*)",            "dest": "src/server.js" }
+    ]
+  }
+  
