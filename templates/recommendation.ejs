@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Movies like <%= movieName %> - MovieApp</title>
+    <link rel="stylesheet" href="/css/recommendation-styles.css" />
+</head>
+<body>
+    <main>
+        <h1>Movies like <%= movieName %></h1>
+
+        <div class="grid-container">
+            <% recommendations.forEach(rec => { %>
+                <div class="card">
+                    <a href="/movie/<%= rec.id %>">
+                        <img
+                            src="https://image.tmdb.org/t/p/w300<%= rec.poster_path %>"
+                            alt="<%= rec.title %> poster"
+                        />
+                        <h3><%= rec.title %></h3>
+                        <p>⭐ <%= rec.vote_average.toFixed(1) %></p>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+
+        <button id="homeBtn" onclick="window.location.href='/'">
+            Back to Home
+        </button>
+    </main>
+</body>
+</html>

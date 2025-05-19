@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home – MovieApp</title>
+    <link rel="stylesheet" href="/css/home-styles.css" />
+    <link rel="stylesheet" href="/css/buttons.css" />
+</head>
+<body>
+    <main>
+        <% if (username) { %>
+            <h2>Welcome, <%= username %>!</h2>
+        <% } else { %>
+            <h2>Welcome!</h2>
+        <% } %>
+
+        <form id="searchForm">
+            <input
+                type="text"
+                id="searchQuery"
+                name="query"
+                maxlength="64"
+                required
+                placeholder="Enter movie name"
+            />
+            <button type="submit" class="action-btn">Search</button>
+        </form>
+
+        <% if (username) { %>
+            <button
+                id="viewWatchlistBtn"
+                class="action-btn"
+                onclick="window.location.href='/profile?user=<%= encodeURIComponent(username) %>'"
+            >
+                View My Watchlist
+            </button>
+        <% } else { %>
+            <button
+                id="authBtn"
+                class="action-btn"
+                onclick="window.location.href='/auth'"
+            >
+                Login / Register
+            </button>
+        <% } %>
+    </main>
+
+    <script>
+        // Preserve username across navigation
+        const username = "<%= username || '' %>";
+
+        document.getElementById('searchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const q = document.getElementById('searchQuery').value.trim();
+            if (!q) return;
+            try {
+                const res = await fetch('/api/search?query=' + encodeURIComponent(q));
+                const data = await res.json();
+                if (data.results && data.results.length > 0) {
+                    const id = data.results[0].id;
+                    // Redirect, including user param if logged in
+                    const url = '/movie/' + id
+                        + (username ? '?user=' + encodeURIComponent(username) : '');
+                    window.location.href = url;
+                } else {
+                    alert('No movies found for: ' + q);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Search failed.');
+            }
+        });
+    </script>
+</body>
+</html>

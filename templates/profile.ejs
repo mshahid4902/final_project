@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title><%= username %>'s Watchlist - MovieApp</title>
+    <link rel="stylesheet" href="/css/profile-styles.css" />
+    <link rel="stylesheet" href="/css/buttons.css" />
+</head>
+<body>
+    <main>
+        <h1><%= username %>'s Watchlist</h1>
+
+        <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+            <div class="error"><%= errorMessage %></div>
+        <% } %>
+
+        <% if (!watchlist || watchlist.length === 0) { %>
+            <p>Your watchlist is empty.</p>
+        <% } else { %>
+            <div class="grid-container">
+                <% watchlist.forEach(movie => { %>
+                    <div class="card">
+                        <a href="/movie/<%= movie.id %>?user=<%= encodeURIComponent(username) %>">
+                            <img
+                                src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>"
+                                alt="Poster for <%= movie.title %>"
+                            />
+                            <h3><%= movie.title %></h3>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+
+        <button
+            id="homeBtn"
+            class="action-btn"
+            onclick="window.location.href='/?user=<%= encodeURIComponent(username) %>'"
+        >
+            Back to Home
+        </button>
+    </main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title><%= movie.title %> - MovieApp</title>
+    <link rel="stylesheet" href="/css/movie-styles.css" />
+</head>
+<body>
+    <!-- Backdrop layer -->
+    <div
+        class="backdrop"
+        <% if (backdropPath) { %>
+            style="background-image: url('https://image.tmdb.org/t/p/original<%= backdropPath %>')"
+        <% } %>
+    ></div>
+
+    <main>
+        <!-- Poster -->
+        <img
+            id="poster"
+            src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>"
+            alt="Poster for <%= movie.title %>"
+        />
+
+        <!-- Trailer -->
+        <% if (trailerKey) { %>
+            <iframe
+                width="560"
+                height="500"
+                src="https://www.youtube.com/embed/<%= trailerKey %>"
+                allowfullscreen
+            ></iframe>
+        <% } %>
+
+        <!-- Title & Overview -->
+        <h1><%= movie.title %></h1>
+        <p><%= movie.overview %></p>
+
+        <button id="recommendBtn" onclick="window.location.href='/recommendations/<%= movie.id %>'">Recommend Similar</button>
+        <% if (username) { %>
+            <form
+                action="/add-to-watchlist"
+                method="post"
+                style="display:inline"
+            >
+                <input type="hidden" name="user"    value="<%= username %>">
+                <input type="hidden" name="movieId" value="<%= movie.id %>">
+                <button
+                    type="submit"
+                    id="watchlistBtn"
+                    class="action-btn"
+                >
+                    Add to Watchlist
+                </button>
+            </form>
+        <% } %>
+
+        <button id="homeBtn" onclick="window.location.href='/'">Back to Home</button>
+    </main>
+</body>
+</html>

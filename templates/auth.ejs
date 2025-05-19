@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login / Register - MovieApp</title>
+    <link rel="stylesheet" href="/css/auth-styles.css" />
+</head>
+<body>
+    <main>
+        <% if (errorMessage) { %>
+            <div class="error"><%= errorMessage %></div>
+        <% } %>
+
+        <section id="loginSection">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                />
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <h3>or</h3>
+
+        <section id="registerSection">
+            <h2>Register</h2>
+            <form action="/create-account" method="post">
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                />
+                <button type="submit">Register</button>
+            </form>
+        </section>
+
+        <button id="homeBtn" onclick="window.location.href='/'">Back to Home</button>
+    </main>
+</body>
+</html>
