@@ -1,5 +1,7 @@
 # MovieApp
 
+**domain (please do not hack my website this is for a school project): final-project-one-omega-62.vercel.app**
+
 A full-stack movie discovery web application built with HTML, CSS, JavaScript, Node.js, Vercel, and Supabase. It integrates the TMDB (The Movie Database) API via the `moviedb-promise` library to allow users to:
 
 * **Search** for movies by name
