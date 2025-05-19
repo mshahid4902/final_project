@@ -37,8 +37,8 @@ This Developer Manual guides future developers through setting up, running, and 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-org/movieapp.git
-   cd movieapp
+   git clone https://github.com/mshahid4902/final_project.git
+   cd final_project
    ```
 2. **Install Node.js (v16+)** if not already installed.
 3. **Install dependencies**:
